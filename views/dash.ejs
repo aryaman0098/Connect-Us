@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <%- include('partials/headtag') %>
+    </head>
+    <body>
+        <!-- Navigation-->
+        <%- include('partials/dashnav') %>
+        <!-- Masthead-->
+        <!-- <header class="masthead"> -->
+            <header class="bg-light" style = "padding-top: 50px; padding-bottom: 50px;">
+            <div class="container position-relative">
+                <div class="row justify-content-center">
+                    <div class="col-xl-6">
+                        <div class="text-center text-white">
+                            <!-- Page heading-->
+                            <%- include('partials/heading', {name: name, email: email, headtitle: 'Welcome to Dashboard'}) %>
+                            <div class="row" style="padding-top: 20px;">
+                                <span> 
+                                    <a href="/join"><button class="btn btn-primary btn-lg" id="submitButton" type="button" style="margin-right:10px ;">Join a meeting</button></a>
+                                    <% if (!isguest) { %>
+                                        <a href="/host"><button class="btn btn-primary btn-lg" id="submitButton" type="button" style="margin-left:10px ;">Host a meeting</button></a>
+                                    <% } %>    
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Instructions Grid-->
+        <%- include('partials/instructions') %>
+        </section>
+        <!-- Footer-->
+        <%- include('partials/footer') %>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>

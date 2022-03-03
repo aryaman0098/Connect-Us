@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <%- include('partials/headtag') %>
+    </head>
+    <body>
+        <!-- Modal-->
+        <% if (modal) { %>
+            <%- include('partials/modal', modal) %>
+        <% } %>
+        <!-- Navigation-->
+        <%- include('partials/dashnav') %>
+        <!-- Masthead-->
+        <!-- <header class="masthead"> -->
+        <header class="bg-light" style = "padding-top: 50px; padding-bottom: 50px;">
+            <div class="container position-relative">
+                <div class="row justify-content-center">
+                    <div class="col-xl-6">
+                        <div class="text-center text-white">
+                            <!-- Page heading-->
+                            <%- include('partials/heading', {name: name, email: email, headtitle: 'Welcome to Join a Meeting'}) %>
+                            <div class="row" style="padding-top: 20px;">
+                                <div class="col">
+                                    <input class="form-control form-control-lg" id="roomName" name="roomid" placeholder="Enter Meeting ID" data-sb-validations="required"/>
+                                </div>
+                                <span style="padding-top: 20px;"> 
+                                    <button
+                                        class="btn btn-primary btn-lg" 
+                                        id="submitButton" 
+                                        type="button" 
+                                        style="margin-right:10px;"
+                                        onclick="{window.location.href = '/join/' + document.getElementById('roomName').value}"
+                                    >Join meeting</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Instructions Grid-->
+        <%- include('partials/instructions') %>
+        <!-- Footer-->
+        <%- include('partials/footer') %>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>

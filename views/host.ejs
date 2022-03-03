@@ -1,0 +1,174 @@
+<html lang="en" dir="ltr">
+    <head>
+        <%- include('partials/headtag') %>
+
+        <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+        
+
+
+        <link rel="stylesheet" href="../css/resource/jquery.multi-emails.css">
+
+        <link rel="stylesheet" href="../css/bootstrap-multiEmail.css">
+        <link rel="stylesheet" href="../css/bootstrap-tagsinput.css">
+
+
+        <style>
+            .todo-list-item {
+                transition: all 0.3s ease-out;
+                position: relative;
+                display: block;
+                padding: 0.5rem 1rem;
+                color: #212529;
+                text-decoration: none;
+                background-color: #fff;
+                border: 1px solid rgba(0, 0, 0, 0.125);
+                width: fit-content;
+                height: fit-content;
+            }
+        
+            .todo-list-item-fall {
+                transform: translateY(12rem) rotateZ(10deg);
+                opacity: 0;
+            }
+        </style>
+
+    </head>
+    
+    <body>
+        <!-- Navigation-->
+        <%- include('partials/dashnav') %>
+        <!-- Masthead-->
+        <!-- <header class="masthead"> -->
+        <header class="bg-light" style = "padding-top: 50px; padding-bottom: 50px;">
+            <div class="container position-relative">
+                <div class="row justify-content-center">
+                    <div class="col-xl-6">
+                        <div class="text-center text-white">
+                            <!-- Page heading-->
+                            <%- include('partials/heading', {name: name, email: email, headtitle: 'Host a Meeting'}) %>
+                        </div>
+
+                            <div class="row" style="padding-top: 20px;">
+                                <div class="col">
+                                    
+                                    <!-- Allow All or Evryone -->
+
+                                    <div class="form-check" style="padding-bottom: 10px;">
+                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadio1" value="option1" checked>
+                                        <label class="form-check-label" for="exampleRadios1">
+                                            Allow Everyone
+                                        </label>
+                                    </div>
+                                    <div class="form-check" style="padding-bottom: 10px;">
+                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                                        <label class="form-check-label" for="exampleRadios2">
+                                            Allow Everyone from IIT Jammu 
+                                        </label>
+                                    </div>
+                                    <div class="form-check" style="padding-bottom: 10px;">
+                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3">
+                                        <label class="form-check-label" for="exampleRadios3">
+                                            Selective Invitation 
+                                        </label>
+                                    </div>
+
+                                    <!-- Email of additional Participants -->
+                                    
+                                    <p>Enter the Email of Participants you Want to Invite</p>
+                                    
+                                    <input class="form-control form-control-lg" id="roomName" style="margin-bottom: 20px; margin-top:20px; color:black" placeholder="Enter Meeting ID" data-sb-validations="required"/>
+
+                                    <span style="padding-top: 20px;"> 
+                                        <button
+                                            class="btn btn-primary btn-lg" 
+                                            id="submitButton" 
+                                            type="button" 
+                                            style="margin-right:10px ;"
+                                            onclick="{window.location.href = '/host/' + document.getElementById('roomName').value}"
+                                            
+                                        >Host meeting</button>
+    
+                                        
+                                    </span>
+                                </div>
+                                
+
+
+                                
+                                <!--  Upload from csv -->
+                                <div style="margin-top: 20px;">
+
+                                    <!-- Upload From CSV Block -->
+
+                                    <div id="div_csv">
+                                        <p> Upload your CSV File: </p>
+                                        <input id="csv" type="file">
+                                    </div>
+                                    
+
+                                    <!-- Add Participant Block  -->
+                                    <div id="div_add_participant" style="margin-top: 10px;">
+                                        <input class="form-control form-control-sm" type="text" id="add_email" placeholder="Enter the Email of Participants you want to invite" autocomplete="off" style="margin-bottom: 10px;"> 
+                                        <button class="btn btn-primary" id="addParticipant" onclick="handleAddParticipant()" style="margin-right: 2px;"> Add </button>
+                                        <!-- TODO Add functionality of submitbutton -->
+                                        <button class="btn btn-primary" id="submit_participant">Submit</button>
+
+
+                                        <div class="todoList" style="margin-top: 20px;" id="div_add_participant">
+                                            <ul class="list-group"> 
+                                            </ul>
+    
+                                            <button class="btn btn-danger" id="clearAll" style="margin-top: 10px;"> Clear All </button>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                                                
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Instructions Grid-->
+        <%- include('partials/instructions') %>
+        <!-- Footer-->
+        <%- include('partials/footer') %>
+        <!-- Bootstrap core JS-->
+        <script src="../js/csvUpload.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="../js/resource/jquery.multi-emails.js"></script>
+
+        <script>
+            $( document ).ready(function() { 
+                $("#div_csv").hide();
+                $("#div_add_participant").hide();
+                
+                $("input[name$='exampleRadios']").click(function() {
+                    let test = $(this).val();
+
+                    if(test=="option1"){
+                        $("#div_csv").hide();
+                        $("#div_add_participant").hide();
+                    }
+                    else if(test=="option2"){
+                        // Add participant div
+                        $("#div_add_participant").show();
+                        $("#div_csv").hide();
+                    }
+                    else{
+                        // Add participant div and div csv
+                        $("#div_add_participant").show();
+                        $("#div_csv").show();
+                    }
+                    
+                });
+            });
+            // $("#div_csv").    
+        </script>
+    </body>
+</html>
+

@@ -1,0 +1,28 @@
+<div id="myModal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Try Again</h5>
+            </div>
+            <div class="modal-body">
+                <p><%= content %></p>
+                <% if (msg) { %>
+                    <p class="text-secondary"><small><%= msg %></small></p>
+                <% } %>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+          var myModal = new bootstrap.Modal(document.getElementById('myModal'))
+        myModal.show();
+    });
+</script>
+<!-- <script>
+    const myModal = new bootstrap.Modal(document.getElementById('myModal'));
+    myModal.show();
+</script> -->
